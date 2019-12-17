@@ -12,7 +12,7 @@ class new_overtime(models.Model):
     @api.onchange("date_from")
     def _calc_date(self):
         if self.date_from != 0:
-            self.date_to = self.date_form + timedelta(days=30)
+            self.date_to = self.date_from + timedelta(days=30)
 
     @api.multi
     def action_generate(self):
