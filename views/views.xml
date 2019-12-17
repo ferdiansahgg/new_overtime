@@ -1,0 +1,14 @@
+<odoo>
+  <data>
+    <record id="inherit_hr_overtime_form" model="ir.ui.view">
+      <field name="name">inherit.hr.overtime.form.view</field>
+      <field name="model">hr.overtime</field>
+      <field name="inherit_id" ref="vit_overtime_hress.view_hr_overtime_form" />
+      <field name="arch" type="xml">
+        <xpath expr="//notebook/page/group" position="before">
+          <button type="object" name="action_generate" string="GENERATE" class="oe_highlight" />
+        </xpath>
+      </field>
+    </record>
+  </data>
+</odoo>
