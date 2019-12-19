@@ -9,6 +9,11 @@ class new_overtime(models.Model):
     _name = "hr.overtime"
     _inherit = "hr.overtime"
 
+    @api.onchange("date_from")
+    def action_month(self):
+        if self.date_from != 0:
+            self.date_to = self.date_from + timedelta(days=30)
+
     @api.onchange("date_to")
     def action_hari(self):
         if self.date_to:
