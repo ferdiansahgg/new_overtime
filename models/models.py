@@ -9,24 +9,15 @@ class new_overtime(models.Model):
     _name = "hr.overtime"
     _inherit = "hr.overtime"
 
-    @api.onchange("date_from")
+    @api.onchange("date_to")
     def action_hari(self):
-        if self.date_from != 0:
-            self.date_to = self.date_from + timedelta(days=30)
-            a = self.date_to
-            a = int(a.strftime("%d"))
-            self.number_of_hours_temp = a * 24
-
-    #     date1 = self.date_from
-    #     date2 = self.date_to
-    #     obj_date1 = datetime.strptime(str(date1, "%d/%b/%Y %H:%M:%S"))
-    #     obj_date2 = datetime.strptime(str(date2, "%d/%b/%Y %H:%M:%S"))
-    #     duration = obj_date1 - obj_date2
-    #     seconds = duration.total_seconds()
-    #     d = divmod(seconds, 86400)
-    #     self.number_of_hours_temp = = divmod(d[1], 3600)
-
-    # self.number_of_hours_temp = 30*self.date_to + 24*self.date_from
+        if self.date_to:
+            DATETIME_FORMAT = "%Y-%m-%d %H:%M:%S"
+            from_dt = datetime.strptime(str(self.date_from), DATETIME_FORMAT)
+            to_dt = datetime.strptime(str(self.date_to), DATETIME_FORMAT)
+            timedelta = to_dt - from_dt
+            diff_day = float(timedelta.days) * 24.0
+            self.number_of_hours_temp = diff_day
 
     @api.onchange("department_id")
     def action_generate(self):
